@@ -131,7 +131,9 @@ PRODUCT_PACKAGES += \
     libtinyxml
 	
 # Camera
-PRODUCT_PACKAGES += libmm-qcamera
+PRODUCT_PACKAGES += \
+    libmm-qcamera \
+    libshim_camera
 
 PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.legacyencoder=true \

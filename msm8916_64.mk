@@ -45,6 +45,12 @@ endif
 
 PRODUCT_BOOT_JARS += qcom.fmradio
 
+# QMI
+PRODUCT_PACKAGES += \
+    dsi_config.xml \
+    netmgr_config.xml \
+    qmi_config.xml
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8916

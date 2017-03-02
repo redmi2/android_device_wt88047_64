@@ -124,3 +124,7 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8916_64/sensors/hals.conf:system/etc/sensors/hals.conf
 
 GMS_ENABLE_OPTIONAL_MODULES := false
+
+#FEATURE_OPENGLES_EXTENSION_PACK support string config file
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml

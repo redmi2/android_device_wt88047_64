@@ -91,4 +91,49 @@
 
    <!-- Enable button light -->
 <!--   <bool name="config_button_light_enabled">true</bool> -->
+
+    <string-array name="config_mobile_tcp_buffers">
+        <item>"lte:2097152,4194304,8388608,262144,524288,1048576"</item>
+        <item>"lte_ca:2097152,4194304,8388608,262144,524288,1048576"</item>
+        <item>"umts:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hspa:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hsupa:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hsdpa:4094,87380,2441216,4096,16384,2441216"</item>
+        <item>"hspap:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"edge:4093,26280,35040,4096,16384,35040"</item>
+        <item>"gprs:4092,8760,11680,4096,8760,11680"</item>
+        <item>"evdo:4094,87380,1048576,4096,16384,262144"</item>
+        <item>"ehrpd:4094,87380,1048576,4096,16384,262144"</item>
+    </string-array>
+	
+    <!-- Our modem doesn't support this query yet -->
+    <string name="config_radio_access_family">GPRS|EDGE|UMTS|HSDPA|HSUPA|HSPA|LTE|HSPAP|GSM|TD_SCDMA|WCDMA|LTE_CA</string>
+
+	    <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
+         (if it exists).  A high value will increase the amount of memory that the kernel
+         tries to keep free, reducing allocation time and causing the lowmemorykiller to kill
+         earlier.  A low value allows more memory to be used by processes but may cause more
+         allocations to block waiting on disk I/O or lowmemorykiller.  Overrides the default
+         value chosen by ActivityManager based on screen size.  0 prevents keeping any extra
+         memory over what the kernel keeps by default.  -1 keeps the default. -->
+    <integer name="config_extraFreeKbytesAbsolute">61440</integer>
+    
+    <!-- Values for GPS configuration -->
+    <string-array translatable="false" name="config_gpsParameters">
+        <item>SUPL_HOST=supl.google.com</item>
+        <item>SUPL_PORT=7275</item>
+        <item>XTRA_SERVER_1=http://xtrapath1.izatcloud.net/xtra2.bin</item>
+        <item>XTRA_SERVER_2=http://xtrapath2.izatcloud.net/xtra2.bin</item>
+        <item>XTRA_SERVER_3=http://xtrapath3.izatcloud.net/xtra2.bin</item>
+        <item>NTP_SERVER=north-america.pool.ntp.org</item>
+        <item>SUPL_MODE=1</item>
+        <item>SUPL_VER=0x20000</item>
+        <item>LPP_PROFILE=0</item>
+        <item>NMEA_PROVIDER=0</item>
+        <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
+        <item>ERR_ESTIMATE=0</item>
+        <item>INTERMEDIATE_POS=0</item>
+        <item>SUPL_ES=0</item>
+    </string-array>
+
 </resources>

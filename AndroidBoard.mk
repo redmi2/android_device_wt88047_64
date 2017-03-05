@@ -18,18 +18,16 @@ endif
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
-ifeq ($(KERNEL_DEFCONFIG),)
-    ifeq ($(TARGET_BUILD_VARIANT),user)
-      KERNEL_DEFCONFIG := msm-perf_defconfig
-    else
-      KERNEL_DEFCONFIG := msm_defconfig
-    endif
-endif
+KERNEL_DEFCONFIG := wt88047-perf_defconfig
+KERNEL_DIR := kernel
 
-include kernel/AndroidKernel.mk
+-include $(TOP)/$(KERNEL_DIR)/AndroidKernel.mk
 
-$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-	$(transform-prebuilt-to-target)
+# msm8916_64.mk doesn't know about us, and we can't PRODUCT_COPY_FILES here.
+# So cp will do.
+.PHONY: $(PRODUCT_OUT)/kernel
+$(PRODUCT_OUT)/kernel: $(TARGET_PREBUILT_KERNEL)
+	cp $(TARGET_PREBUILT_KERNEL) $(PRODUCT_OUT)/kernel
 
 #----------------------------------------------------------------------
 # Copy additional target-specific files
@@ -63,38 +61,6 @@ LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := gpio-keys.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := synaptics_rmi4_i2c.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := synaptics_dsx.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := ft5x06_ts.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
 include $(BUILD_PREBUILT)
 
 ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)

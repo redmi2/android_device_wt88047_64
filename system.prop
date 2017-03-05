@@ -23,6 +23,24 @@ ro.telephony.default_network=22,1
 
 debug.sf.hw=0
 debug.egl.hw=0
+
+# Radio
+persist.radio.multisim.config=dsds
+ril.ecclist=112,911,110,122,119,120,000,118
+ril.ecclist1=112,911,110,122,119,120,000,118
+persist.radio.no_cons_man_roam=1
+ro.telephony.ril.config=simactivation
+ro.ril.multi_rat_capable=true
+
+# Disable mobile data at first boot
+ro.com.android.mobiledata=true
+
+# Connectivity Engine
+persist.cne.feature=4
+persist.dpm.feature=3
+persist.data.target=dpm1
+persist.data.qmi.adb_logmask=0
+
 persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.logs=0
 dalvik.vm.heapsize=36m
@@ -37,11 +55,6 @@ debug.enable.sglscale=1
 #lpa.decode=false
 #lpa.use-stagefright=true
 #persist.speaker.prot.enable=false
-
-#
-# system props for the cne module
-#
-persist.cne.feature=1
 
 #system props for the MM modules
 media.stagefright.enable-player=true
@@ -86,8 +99,8 @@ ro.qualcomm.cabl=2
 
 #
 # System props for telephony
-# System prop to turn on CdmaLTEPhone always
-telephony.lteOnCdmaDevice=1
+# System prop to turn on(off) CdmaLTEPhone always
+#telephony.lteOnCdmaDevice=1
 
 #
 # System props for bluetooh
@@ -131,10 +144,15 @@ voice.voip.conc.disabled=true
 sys.audio.init=false
 
 #Set composition for USB
-persist.sys.usb.config=diag,serial_smd,rmnet_bam,adb
+#persist.sys.usb.config=mtp,adb
 
 #Set read only default composition for USB
-ro.sys.usb.default.config=diag,serial_smd,rmnet_bam,adb
+#ro.sys.usb.default.config=mtp,adb
+
+#tibam adb-to
+persist.service.adb.enable=1
+persist.service.debuggable=1
+persist.sys.usb.config=mtp,adb
 
 #property to enable user to access Google WFD settings
 persist.debug.wfd.enable=1
@@ -171,6 +189,10 @@ ro.config.zram=true
 # system property for PIP support
 persist.camera.pip.support=0
 
+# Display
+ro.sf.lcd_density=312
+persist.sys.lcd_density=312
+
 #Enable B service adj transition by default
 ro.sys.fw.bservice_enable=true
 ro.sys.fw.bservice_limit=5
@@ -181,3 +203,9 @@ ro.sys.fw.dex2oat_thread_count=4
 #min/max cpu in core control
 ro.core_ctl_min_cpu=2
 ro.core_ctl_max_cpu=4
+
+# Art
+dalvik.vm.dex2oat-flags=--no-watch-dog
+
+#show selinux status
+ro.build.selinux=1

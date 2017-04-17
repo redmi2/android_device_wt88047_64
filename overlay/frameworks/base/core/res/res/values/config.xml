@@ -109,15 +109,6 @@
     <!-- Our modem doesn't support this query yet -->
     <string name="config_radio_access_family">GPRS|EDGE|UMTS|HSDPA|HSUPA|HSPA|LTE|HSPAP|GSM|TD_SCDMA|WCDMA|LTE_CA</string>
 
-	    <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
-         (if it exists).  A high value will increase the amount of memory that the kernel
-         tries to keep free, reducing allocation time and causing the lowmemorykiller to kill
-         earlier.  A low value allows more memory to be used by processes but may cause more
-         allocations to block waiting on disk I/O or lowmemorykiller.  Overrides the default
-         value chosen by ActivityManager based on screen size.  0 prevents keeping any extra
-         memory over what the kernel keeps by default.  -1 keeps the default. -->
-    <integer name="config_extraFreeKbytesAbsolute">61440</integer>
-    
     <!-- Values for GPS configuration -->
     <string-array translatable="false" name="config_gpsParameters">
         <item>SUPL_HOST=supl.google.com</item>

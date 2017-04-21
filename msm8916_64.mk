@@ -129,6 +129,14 @@ PRODUCT_PACKAGES += \
 # Display
 PRODUCT_PACKAGES += \
     libtinyxml
+    
+# IMSEnabler
+PRODUCT_PACKAGES += \
+   IMSEnabler \
+   libshim_parcel \
+   libshim_boringssl \
+   libshims_camera \
+   libshims_ims
 	
 # Camera
 PRODUCT_PACKAGES += \

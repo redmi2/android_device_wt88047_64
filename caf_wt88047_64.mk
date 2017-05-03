@@ -9,6 +9,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from wt88047 device
 $(call inherit-product, device/wt88047_64/msm8916_64.mk)
 
+PRODUCT_COPY_FILES += device/wt88047_64/fstab.qcom:root/fstab.qcom
+
 PRODUCT_NAME := caf_wt88047_64
 PRODUCT_DEVICE := wt88047_64
 PRODUCT_MANUFACTURER := Xiaomi

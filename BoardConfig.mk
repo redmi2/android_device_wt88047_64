@@ -139,7 +139,7 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/wt88047_64/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/wt88047_64/recovery/root/etc/twrp.fstab
 
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false

@@ -219,3 +219,7 @@ ro.camera.sensors=ov8865_q8v18a,ov2680_skuhf,ov2680_5987fhq
 
 # Disable camera shutter sound.
 persist.camera.shutter.disable=0
+
+# Sdcardfs
+ro.sys.sdcardfs=true
+

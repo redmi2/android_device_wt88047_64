@@ -94,13 +94,13 @@ PRODUCT_PACKAGES += \
 
 # Audio configuration od AOSP
 PRODUCT_COPY_FILES += \
-    device/wt88047_64/audio/acdb/Bluetooth_cal.acdb:system/etc/acdbdata/QRD/Bluetooth_cal.acdb \
-    device/wt88047_64/audio/acdb/General_cal.acdb:system/etc/acdbdata/QRD/General_cal.acdb \
-    device/wt88047_64/audio/acdb/Global_cal.acdb:system/etc/acdbdata/QRD/Global_cal.acdb \
-    device/wt88047_64/audio/acdb/Handset_cal.acdb:system/etc/acdbdata/QRD/Handset_cal.acdb \
-    device/wt88047_64/audio/acdb/Hdmi_cal.acdb:system/etc/acdbdata/QRD/Hdmi_cal.acdb \
-    device/wt88047_64/audio/acdb/Headset_cal.acdb:system/etc/acdbdata/QRD/Headset_cal.acdb \
-    device/wt88047_64/audio/acdb/Speaker_cal.acdb:system/etc/acdbdata/QRD/Speaker_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Bluetooth_cal.acdb:system/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_General_cal.acdb:system/etc/acdbdata/QRD/QRD_General_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Global_cal.acdb:system/etc/acdbdata/QRD/QRD_Global_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Handset_cal.acdb:system/etc/acdbdata/QRD/QRD_Handset_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Hdmi_cal.acdb:system/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Headset_cal.acdb:system/etc/acdbdata/QRD/QRD_Headset_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Speaker_cal.acdb:system/etc/acdbdata/QRD/QRD_Speaker_cal.acdb \
     device/wt88047_64/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     device/wt88047_64/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/wt88047_64/audio/audio_policy.conf:system/etc/audio_policy.conf \

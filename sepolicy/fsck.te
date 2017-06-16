@@ -1,0 +1,2 @@
+allow fsck block_device:blk_file { getattr ioctl };
+#allow fsck block_device:blk_file { getattr ioctl read write open };

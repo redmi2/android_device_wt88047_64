@@ -19,7 +19,7 @@ DEVICE_PROVISIONED=1
 #
 # Set network mode to (T/L/G/W/1X/EVDO, G) for DSDS mode
 #
-ro.telephony.default_network=22,1
+ro.telephony.default_network=9,9
 
 debug.sf.hw=0
 debug.egl.hw=0
@@ -219,3 +219,7 @@ ro.camera.sensors=ov8865_q8v18a,ov2680_skuhf,ov2680_5987fhq
 
 # Disable camera shutter sound.
 persist.camera.shutter.disable=0
+
+# Sdcardfs
+ro.sys.sdcardfs=true
+

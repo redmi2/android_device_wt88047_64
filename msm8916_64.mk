@@ -57,7 +57,6 @@ PRODUCT_PACKAGES += \
     
 PRODUCT_COPY_FILES += \
     device/wt88047_64/configs/flp.conf:system/etc/flp.conf \
-    device/wt88047_64/configs/gps.conf:system/etc/gps.conf \
     device/wt88047_64/configs/quipc.conf:system/etc/quipc.conf \
     device/wt88047_64/configs/sap.conf:system/etc/sap.conf
 
@@ -94,13 +93,13 @@ PRODUCT_PACKAGES += \
 
 # Audio configuration od AOSP
 PRODUCT_COPY_FILES += \
-    device/wt88047_64/audio/acdb/Bluetooth_cal.acdb:system/etc/acdbdata/QRD/Bluetooth_cal.acdb \
-    device/wt88047_64/audio/acdb/General_cal.acdb:system/etc/acdbdata/QRD/General_cal.acdb \
-    device/wt88047_64/audio/acdb/Global_cal.acdb:system/etc/acdbdata/QRD/Global_cal.acdb \
-    device/wt88047_64/audio/acdb/Handset_cal.acdb:system/etc/acdbdata/QRD/Handset_cal.acdb \
-    device/wt88047_64/audio/acdb/Hdmi_cal.acdb:system/etc/acdbdata/QRD/Hdmi_cal.acdb \
-    device/wt88047_64/audio/acdb/Headset_cal.acdb:system/etc/acdbdata/QRD/Headset_cal.acdb \
-    device/wt88047_64/audio/acdb/Speaker_cal.acdb:system/etc/acdbdata/QRD/Speaker_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Bluetooth_cal.acdb:system/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_General_cal.acdb:system/etc/acdbdata/QRD/QRD_General_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Global_cal.acdb:system/etc/acdbdata/QRD/QRD_Global_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Handset_cal.acdb:system/etc/acdbdata/QRD/QRD_Handset_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Hdmi_cal.acdb:system/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Headset_cal.acdb:system/etc/acdbdata/QRD/QRD_Headset_cal.acdb \
+    device/wt88047_64/audio/acdb/QRD_Speaker_cal.acdb:system/etc/acdbdata/QRD/QRD_Speaker_cal.acdb \
     device/wt88047_64/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     device/wt88047_64/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     device/wt88047_64/audio/audio_policy.conf:system/etc/audio_policy.conf \
@@ -189,3 +188,7 @@ PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
 #PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
 
 GMS_ENABLE_OPTIONAL_MODULES := false
+
+#FEATURE_OPENGLES_EXTENSION_PACK support string config file
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml

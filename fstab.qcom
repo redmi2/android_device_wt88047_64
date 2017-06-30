@@ -18,7 +18,7 @@
 /dev/block/bootdevice/by-name/misc           /misc        emmc    defaults                                                    defaults
 /dev/block/bootdevice/by-name/modem          /firmware    vfat    ro,shortname=lower,uid=1000,gid=1026,dmask=227,fmask=337,context=u:object_r:firmware_file:s0    wait
 
-/devices/soc.0/7864900.sdhci/mmc_host*                     auto   auto    nosuid,nodev         wait,voldmanaged=sdcard1:auto,noemulatedsd,encryptable=footer
+/devices/soc.0/7864900.sdhci/mmc_host*                           auto         auto    defaults       voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/soc.0/78b7000.spi/spi_master/spi0/spi0.0          /storage/uicc0     vfat    nosuid,nodev         wait,voldmanaged=uicc0:auto
 /devices/soc.0/78b7000.spi/spi_master/spi0/spi0.0          /storage/uicc1     vfat    nosuid,nodev         wait,voldmanaged=uicc1:auto
 /devices/platform/msm_hsusb*                               /storage/usbotg    vfat    nosuid,nodev         wait,voldmanaged=usbotg:auto

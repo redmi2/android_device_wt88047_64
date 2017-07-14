@@ -21,6 +21,9 @@ DEVICE_PROVISIONED=1
 #
 ro.telephony.default_network=22,1
 
+#Enable Camera1 API for VT calls
+persist.vendor.qti.telephony.vt_cam_interface=1
+
 debug.sf.hw=0
 debug.egl.hw=0
 persist.hwc.mdpcomp.enable=true

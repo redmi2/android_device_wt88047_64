@@ -49,6 +49,7 @@ on fs
     wait /dev/block/bootdevice/by-name/persist
     mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
     mkdir /persist/data 0700 system system
+    mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
 
     wait /dev/block/bootdevice/by-name/modem
@@ -64,11 +65,14 @@ on post-fs-data
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
     mkdir /data/misc/hbtp 0766 system system
+    mkdir /data/vendor/hbtp 0750 system system
     mkdir /data/misc/dts 0770 media audio
     chown system system /sys/afe_properties/cfg_name
     chown system system /sys/afe_properties/hallib_name
     chown system system /sys/afe_properties/wake_up_enable
 
+#Create folder for mm-qcamera-daemon
+    mkdir /data/vendor/camera 0770 camera camera
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -101,7 +105,7 @@ service qrngp /system/bin/qrngp -f
 on property:sys.boot_completed=1
    start qrngp
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
@@ -122,9 +126,10 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
+   socket thermal-send-rule stream 0660 system system
    group root
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /system/vendor/bin/time_daemon
    class late_start
    user root
    group root
@@ -147,44 +152,50 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
 
-service wcnss-service /system/bin/wcnss_service
+service wcnss-service /system/vendor/bin/wcnss_service
     class main
     user system
     group system wifi radio
     oneshot
 
-service imsqmidaemon /system/bin/imsqmidaemon
+service imsstarter /vendor/bin/init.qti.ims.sh
+    class main
+    oneshot
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio log qcom_diag
+    disabled
 
-service imsdatadaemon /system/bin/imsdatadaemon
+on property:service.qti.ims.enabled=1
+    #start imsqmidaemon
+
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
     group system wifi radio inet log qcom_diag
     disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
+on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service ims_rtp_daemon /system/bin/ims_rtp_daemon
+service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    class main
    user system
-   socket ims_rtpd stream 0660 system radio
    group radio diag qcom_diag log inet
    disabled
 
-service imscmservice /system/bin/imscmservice
+service imsrcsservice /system/vendor/bin/imsrcsd
    class main
    user system
-   group radio diag inet log
+   group radio diag qcom_diag inet log
    disabled
 
-on property:sys.ims.DATA_DAEMON_STATUS=1
+on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
-    start imscmservice
+#    start imsrcsservice
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
@@ -216,13 +227,13 @@ service hbtp /system/vendor/bin/hbtp_daemon
     group root
     disabled
 
-service dts_configurator /system/bin/dts_configurator
+service dts_configurator /system/vendor/bin/dts_configurator
     class main
     user system
     group system
     oneshot
 
-service per_mgr /system/bin/pm-service
+service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system

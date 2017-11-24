@@ -42,6 +42,8 @@ BOOTLOADER_PLATFORM := msm8916# use msm8952 LK configuration
 #MALLOC_IMPL := dlmalloc
 MALLOC_SVELTE := true
 
+TARGET_RECOVERY_FSTAB := device/qcom/msm8916_64/recovery.fstab
+
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x02000000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x02000000
@@ -58,7 +60,6 @@ PROTOBUF_SUPPORTED := false
 
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
-TARGET_USES_QCOM_BSP := true
 TARGET_NO_RPC := true
 
 # Enable CSVT
@@ -78,6 +79,12 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := false
 
+ifeq ($(ENABLE_VENDOR_IMAGE), true)
+BOARD_VENDORIMAGE_PARTITION_SIZE := 524288000
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+endif
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -100,7 +107,7 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_BOARD_SUFFIX := _64
 
 #Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := false
+#TARGET_HW_DISK_ENCRYPTION := false
 
 #Enable SW based full disk encryption
 #TARGET_SWV8_DISK_ENCRYPTION := true
@@ -126,5 +133,3 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
   DEX_PREOPT_DEFAULT := nostripping
 endif
 
-#enabling IMS for this target
-TARGET_USES_IMS := true

@@ -74,7 +74,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- display -->
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <impl level="generic"></impl>
         <version>2.0</version>
         <interface>
@@ -94,7 +94,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
+        <transport arch="32+64">passthrough</transport>
         <impl level="generic"></impl>
         <version>2.1</version>
         <interface>

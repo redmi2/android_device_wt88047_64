@@ -28,14 +28,21 @@
 #
 
 import init.carrier.rc
+#import init.spectrum.rc
 
 on early-init
     mkdir /firmware 0771 system system
     mkdir /system 0777 root root
     symlink /data/tombstones /tombstones
 
+#on fs
+#    wait /dev/block/bootdevice
+#    mount_all fstab.qcom
+#    write /proc/sys/vm/swappiness 100
+    
 on fs
-    wait /dev/block/bootdevice
+    wait /dev/block/platform/soc.0/7824900.sdhci
+    symlink /dev/block/platform/soc.0/7824900.sdhci /dev/block/bootdevice
     mount_all fstab.qcom
     write /proc/sys/vm/swappiness 100
 
@@ -44,10 +51,10 @@ on fs
     # results in failure to launch late-start class.
 
     wait /dev/block/bootdevice/by-name/cache
-    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev barrier=1
+    mount ext4 /dev/block/bootdevice/by-name/cache /cache noatime nosuid nodev barrier=1
 
     wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev barrier=1
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
@@ -82,6 +89,8 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 
 on init
    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+   
+   export LD_SHIM_LIBS "/system/bin/mm-qcamera-daemon|libshim_camera.so:/system/vendor/lib/libmmqjpeg_codec.so|libboringssl-compat.so:/system/vendor/lib64/lib-imsdpl.so|libshim_boringssl.so:/system/vendor/lib64/lib-imscamera.so|libshims_camera.so:/system/vendor/lib64/lib-imsvt.so|libshims_ims.so"
 
 # Allow usb charging to be disabled peristently
 on property:persist.usb.chgdisabled=1
@@ -151,6 +160,26 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0070/secure_touch
+    
+# YAS537 magnetic sensor
+    chown system system /sys/class/sensors/yas537-mag/calibrate
+    chown system system /sys/class/sensors/yas537-mag/enable
+    chown system system /sys/class/sensors/yas537-mag/enable_wakeup
+    chown system system /sys/class/sensors/yas537-mag/flush
+    chown system system /sys/class/sensors/yas537-mag/max_latency
+    chown system system /sys/class/sensors/yas537-mag/poll_delay
+    chmod 0660 /sys/class/sensors/yas537-mag/calibrate
+    chmod 0660 /sys/class/sensors/yas537-mag/enable
+    chmod 0660 /sys/class/sensors/yas537-mag/enable_wakeup
+    chmod 0660 /sys/class/sensors/yas537-mag/flush
+    chmod 0660 /sys/class/sensors/yas537-mag/max_latency
+    chmod 0660 /sys/class/sensors/yas537-mag/poll_delay
+
+    chown system input /sys/class/sensors/yas537-mag/hard_offset
+    chown system system /sys/class/sensors/yas537-mag/self_test
+    chmod 0664 /sys/class/sensors/yas537-mag/hard_offset
+    chmod 0664 /sys/class/sensors/yas537-mag/self_test
+    write /sys/class/sensors/yas537-mag/position 5
 
 service wcnss-service /system/vendor/bin/wcnss_service
     class main

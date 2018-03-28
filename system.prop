@@ -19,13 +19,31 @@ DEVICE_PROVISIONED=1
 #
 # Set network mode to (T/L/G/W/1X/EVDO, G) for DSDS mode
 #
-ro.telephony.default_network=22,1
+ro.telephony.default_network=9,9
 
 #Enable Camera1 API for VT calls
 persist.vendor.qti.telephony.vt_cam_interface=1
 
 debug.sf.hw=0
 debug.egl.hw=0
+
+# Radio
+persist.radio.multisim.config=dsds
+ril.ecclist=112,911,110,122,119,120,000,118
+ril.ecclist1=112,911,110,122,119,120,000,118
+persist.radio.no_cons_man_roam=1
+ro.telephony.ril.config=simactivation
+ro.ril.multi_rat_capable=true
+
+# Disable mobile data at first boot
+ro.com.android.mobiledata=true
+
+# Connectivity Engine
+persist.cne.feature=4
+persist.dpm.feature=3
+persist.data.target=dpm1
+persist.data.qmi.adb_logmask=0
+
 persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.logs=0
 dalvik.vm.heapsize=36m
@@ -33,6 +51,7 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.mdpcomp.idletime=600
 debug.enable.sglscale=1
+debug.sf.recomputecrop=0
 
 #ro.hdmi.enable=true
 #tunnel.decode=true
@@ -40,11 +59,6 @@ debug.enable.sglscale=1
 #lpa.decode=false
 #lpa.use-stagefright=true
 #persist.speaker.prot.enable=false
-
-#
-# system props for the cne module
-#
-persist.cne.feature=1
 
 #system props for the MM modules
 media.stagefright.enable-player=true
@@ -58,6 +72,9 @@ media.msm8929hw=0
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true
 media.aac_51_output_enabled=true
+
+#disbale treble for 8916
+persist.media.treble_omx=false
 
 # system prop for custom hls enhancements
 persist.media.hls.enhancements=false
@@ -89,8 +106,8 @@ ro.qualcomm.cabl=2
 
 #
 # System props for telephony
-# System prop to turn on CdmaLTEPhone always
-telephony.lteOnCdmaDevice=1
+# System prop to turn on(off) CdmaLTEPhone always
+#telephony.lteOnCdmaDevice=1
 
 #
 # System props for bluetooh
@@ -110,6 +127,7 @@ ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true
+persist.vendor.bt.enable.splita2dp=false
 #Set for msm8916
 tunnel.audio.encode = false
 #Buffer size in kbytes for compress offload playback
@@ -134,10 +152,14 @@ voice.voip.conc.disabled=true
 sys.audio.init=false
 
 #Set composition for USB
-persist.sys.usb.config=diag,serial_smd,rmnet_bam,adb
+persist.sys.usb.config=mtp,adb
 
 #Set read only default composition for USB
-ro.sys.usb.default.config=diag,serial_smd,rmnet_bam,adb
+ro.sys.usb.default.config=mtp,adb
+
+#tibam adb-to
+persist.service.adb.enable=1
+persist.service.debuggable=1
 
 #property to enable user to access Google WFD settings
 persist.debug.wfd.enable=1
@@ -149,6 +171,10 @@ ro.vendor.gt_library=libqti-gt.so
 
 #property to enable narrow search range for video encoding
 vidc.enc.narrow.searchrange=1
+
+#Beautification
+persist.ts.postmakeup=true
+persist.ts.rtmakeup=true
 
 #property to enable DS2 dap
 audio.dolby.ds2.enabled=true
@@ -174,6 +200,10 @@ ro.vendor.qti.config.zram=true
 # system property for PIP support
 persist.camera.pip.support=0
 
+# Display
+ro.sf.lcd_density=312
+persist.sys.lcd_density=312
+
 #Enable B service adj transition by default
 ro.vendor.qti.sys.fw.bservice_enable=true
 ro.vendor.qti.sys.fw.bservice_limit=5
@@ -182,3 +212,18 @@ ro.vendor.qti.sys.fw.bservice_age=5000
 #min/max cpu in core control
 ro.vendor.qti.core_ctl_min_cpu=2
 ro.vendor.qti.core_ctl_max_cpu=4
+
+# Art
+dalvik.vm.dex2oat-flags=--no-watch-dog
+
+#show selinux status
+ro.build.selinux=1
+
+#wt88047 camera sensor list. 
+ro.camera.sensors=ov8865_q8v18a,ov2680_skuhf,ov2680_5987fhq
+
+# Disable camera shutter sound.
+persist.camera.shutter.disable=0
+
+# Sdcardfs
+ro.sys.sdcardfs=true
